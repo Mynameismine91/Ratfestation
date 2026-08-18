@@ -17,6 +17,14 @@ private float roamTimer;
 void Start()
 {
     ChooseRandomDirection();
+if (gameObject.name.StartsWith("slow"))
+        {
+            moveSpeed = 2f;
+        }
+else if (gameObject.name.StartsWith("fast"))
+        {
+            moveSpeed = 4f;
+        }
 }
 
 void Update()
