@@ -94,4 +94,13 @@ void ChooseRandomDirection()
     roamDirection = Random.insideUnitCircle.normalized;
     roamTimer = roamChangeTime;
 }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.name == "Cat" )
+        {
+            Destroy(GameObject);
+        }
+    }
 }
