@@ -100,7 +100,7 @@ void ChooseRandomDirection()
 
         if (collision.gameObject.name == "Cat" )
         {
-            Destroy(GameObject);
+            Destroy(gameObject);
         }
     }
 }
