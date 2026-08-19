@@ -83,6 +83,10 @@ void Update()
 
         transform.Translate(roamDirection * moveSpeed * Time.deltaTime);
     }
+        Vector3 position = transform.position;
+    position.y = Mathf.Clamp(position.y, -30.5f, 30f);
+    position.x = Mathf.Clamp(position.x, -30.5f, 30f);    
+    transform.position = position;
 }
 
 void ChooseRandomDirection()
@@ -90,4 +94,13 @@ void ChooseRandomDirection()
     roamDirection = Random.insideUnitCircle.normalized;
     roamTimer = roamChangeTime;
 }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.name == "Cat" )
+        {
+            Destroy(GameObject);
+        }
+    }
 }
