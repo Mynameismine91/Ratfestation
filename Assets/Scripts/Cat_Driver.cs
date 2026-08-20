@@ -21,5 +21,11 @@ public class Cat_Driver : MonoBehaviour
         tempVect = tempVect.normalized * catSpeed * Time.deltaTime;
 
         obj.transform.position += tempVect;
+
+
+     Vector3 position = transform.position; //boundary
+    position.y = Mathf.Clamp(position.y, -30.5f, 30f);
+    position.x = Mathf.Clamp(position.x, -30.5f, 30f);    
+    transform.position = position;
     }
 }
