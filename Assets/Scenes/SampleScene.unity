@@ -279,6 +279,7 @@ GameObject:
   - component: {fileID: 427389702}
   - component: {fileID: 427389701}
   - component: {fileID: 427389703}
+  - component: {fileID: 427389704}
   m_Layer: 0
   m_Name: Cat
   m_TagString: Cat
@@ -374,6 +375,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cat_Driver
   catSpeed: 5
   obj: {fileID: 427389702}
+--- !u!58 &427389704
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427389700}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,38 +519,6 @@ MonoBehaviour:
   WatchMe: {fileID: 0}
   boundX: 0.15
   boundY: 0.5
---- !u!1 &673305737 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8587359374230649255, guid: 65a8312012ec89c43b6ab3c03cbe70a3, type: 3}
-  m_PrefabInstance: {fileID: 1456403364}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &673305742
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673305737}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1001 &1456403364
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -569,10 +574,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8587359374230649255, guid: 65a8312012ec89c43b6ab3c03cbe70a3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 673305742}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65a8312012ec89c43b6ab3c03cbe70a3, type: 3}
 --- !u!1001 &2309483848524958928
 PrefabInstance:
@@ -629,43 +631,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8040275772389166801, guid: 3be996604030679459a9359e8764d880, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8203348995647879005}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3be996604030679459a9359e8764d880, type: 3}
---- !u!1 &6291023891259301823 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8040275772389166801, guid: 3be996604030679459a9359e8764d880, type: 3}
-  m_PrefabInstance: {fileID: 2309483848524958928}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &8203348995647879005
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6291023891259301823}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -674,4 +641,3 @@ SceneRoots:
   - {fileID: 2309483848524958928}
   - {fileID: 1456403364}
   - {fileID: 427389702}
-  - {fileID: 40810258}
