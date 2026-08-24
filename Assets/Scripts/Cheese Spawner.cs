@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CheeseSpawner : MonoBehaviour
@@ -7,10 +6,13 @@ public class CheeseSpawner : MonoBehaviour
     public GameObject food;
     public float spawnRate;
     public Vector2 spawnArea;
+    public int MaxCheese = 10;
+    private Gamemanager GM;
     void Start()
     {
         StartCoroutine(FoodSpawner(spawnRate));
     }
+
 
     IEnumerator FoodSpawner(float waitTime)
     {
@@ -23,6 +25,5 @@ public class CheeseSpawner : MonoBehaviour
 
             Instantiate(food, random, Quaternion.identity);
         }
-        
     }
 }
