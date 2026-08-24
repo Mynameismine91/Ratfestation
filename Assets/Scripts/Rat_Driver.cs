@@ -1,123 +1,155 @@
 using UnityEngine;
 
-
-
 public class Rat_Driver : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-public float Detection_range = 5; // this is the range or distance the food is from the rat before they start going straight for it
-public bool locked_in; //the state wherein the rats are going straight to the food
-public float moveSpeed = 2f;
-public Transform foodtransform;
-public float roamChangeTime = 2f;
-private Gamemanager GM;
-private Vector2 roamDirection;
-private float roamTimer;
-private int Assignedpoints;
+    public float Detection_range = 5f;
+    public bool locked_in;
+    public float moveSpeed = 2f;
+    public Transform foodtransform;
+    public float roamChangeTime = 2f;
 
-void Start()
-{
-    ChooseRandomDirection();
-if (gameObject.name.StartsWith("slow"))
+    private Gamemanager GM;
+    private Vector2 roamDirection;
+    private float roamTimer;
+    private int Assignedpoints;
+
+    void Start()
+    {
+        ChooseRandomDirection();
+
+        if (gameObject.name.StartsWith("slow"))
         {
             moveSpeed = 2f;
             Assignedpoints = 1;
         }
-else if (gameObject.name.StartsWith("fast"))
+        else if (gameObject.name.StartsWith("fast"))
         {
             moveSpeed = 4f;
             Assignedpoints = 2;
         }
-}
-
-void Update()
-{
-    if (foodtransform == null)
-    {
-        GameObject food = GameObject.FindGameObjectWithTag("Food");
-
-        if (food != null)
-        {
-            foodtransform = food.transform;
-        }
     }
 
-if (GM == null)
+    void Update()
     {
-        GameObject gmObject = GameObject.Find("Gamemanager");
+        // Find the closest food
+        FindClosestFood();
 
-        if (gmObject != null)
+        // Find GameManager
+        if (GM == null)
         {
-            GM = gmObject.GetComponent<Gamemanager>();
-                    Debug.Log("1");
+            GameObject gmObject = GameObject.Find("Gamemanager");
 
+            if (gmObject != null)
+            {
+                GM = gmObject.GetComponent<Gamemanager>();
+                Debug.Log("GameManager found");
+            }
         }
-    }
 
-    // Check distance to food
-    // If food exists, check its distance
-    if (foodtransform != null)
-    {
-        float distance = Vector3.Distance(
-            transform.position,
-            foodtransform.position
-        );
-
-        if (distance <= Detection_range)
+        // Check distance to closest food
+        if (foodtransform != null)
         {
-            locked_in = true;
+            float distance = Vector2.Distance(
+                transform.position,
+                foodtransform.position
+            );
+
+            if (distance <= Detection_range)
+            {
+                locked_in = true;
+            }
+            else
+            {
+                locked_in = false;
+            }
         }
         else
         {
+            // No food exists
             locked_in = false;
         }
-    }
-    else
-    {
-        // No food exists
-        locked_in = false;
-    }
 
-    // Movement
-    if (locked_in)
-    {
-        // Move directly toward food
-        Vector2 direction = (foodtransform.position - transform.position).normalized;
-
-        transform.Translate(direction * moveSpeed * Time.deltaTime);
-    }
-    else
-    {
-        // Random roaming
-        roamTimer -= Time.deltaTime;
-
-        if (roamTimer <= 0)
+        // Movement
+        if (locked_in)
         {
-            ChooseRandomDirection();
+            // Move toward closest food
+            Vector2 direction =
+                (foodtransform.position - transform.position).normalized;
+
+            transform.Translate(
+                direction * moveSpeed * Time.deltaTime
+            );
+        }
+        else
+        {
+            // Random roaming
+            roamTimer -= Time.deltaTime;
+
+            if (roamTimer <= 0)
+            {
+                ChooseRandomDirection();
+            }
+
+            transform.Translate(
+                roamDirection * moveSpeed * Time.deltaTime
+            );
         }
 
-        transform.Translate(roamDirection * moveSpeed * Time.deltaTime);
-    }
+        // Boundary
         Vector3 position = transform.position;
-    position.y = Mathf.Clamp(position.y, -30.5f, 30f);
-    position.x = Mathf.Clamp(position.x, -30.5f, 30f);    
-    transform.position = position;
-}
 
-void ChooseRandomDirection()
-{
-    roamDirection = Random.insideUnitCircle.normalized;
-    roamTimer = roamChangeTime;
-}
+        position.y = Mathf.Clamp(position.y, -30.5f, 30f);
+        position.x = Mathf.Clamp(position.x, -30.5f, 30f);
+
+        transform.position = position;
+    }
+
+    void FindClosestFood()
+    {
+        GameObject[] foods = GameObject.FindGameObjectsWithTag("Food");
+
+        float closestDistance = Mathf.Infinity;
+        GameObject closestFood = null;
+
+        foreach (GameObject food in foods)
+        {
+            float distance = Vector2.Distance(
+                transform.position,
+                food.transform.position
+            );
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestFood = food;
+            }
+        }
+
+        if (closestFood != null)
+        {
+            foodtransform = closestFood.transform;
+        }
+        else
+        {
+            foodtransform = null;
+        }
+    }
+
+    void ChooseRandomDirection()
+    {
+        roamDirection = Random.insideUnitCircle.normalized;
+        roamTimer = roamChangeTime;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        if (collision.gameObject.name == "Cat" )
+        if (collision.gameObject.name == "Cat")
         {
             GM.points += Assignedpoints;
-        Debug.Log("2");
-        GM.UpdateScoreText();
+
+            Debug.Log("Rat eaten! +" + Assignedpoints + " points");
+
+            GM.UpdateScoreText();
 
             Destroy(gameObject);
         }

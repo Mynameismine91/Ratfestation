@@ -11,4 +11,8 @@ public int points = 0;
         scoreText.text = "Score: " + points;
     }
 
+
+
+
+
 }

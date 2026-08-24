@@ -620,8 +620,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheeseSpawner
   food: {fileID: 6016144457121674091, guid: 693ab119bb4c235458408081048cfcd6, type: 3}
-  spawnRate: 3
-  spawnArea: {x: 10, y: 10}
+  spawnRate: 5
+  spawnArea: {x: 25, y: 25}
 --- !u!4 &884724207
 Transform:
   m_ObjectHideFlags: 0
@@ -632,6 +632,54 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &904836103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 904836105}
+  - component: {fileID: 904836104}
+  m_Layer: 0
+  m_Name: Rat Den
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &904836104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904836103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0daf40151a3284e947f45c47d41b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  ratPrefabs:
+  - {fileID: 8040275772389166801, guid: 3be996604030679459a9359e8764d880, type: 3}
+  - {fileID: 8587359374230649255, guid: 65a8312012ec89c43b6ab3c03cbe70a3, type: 3}
+  spawnInterval: 15
+--- !u!4 &904836105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904836103}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.8, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1064,3 +1112,4 @@ SceneRoots:
   - {fileID: 96607097}
   - {fileID: 1769027049}
   - {fileID: 884724207}
+  - {fileID: 904836105}
