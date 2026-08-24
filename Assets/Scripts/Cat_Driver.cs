@@ -5,12 +5,6 @@ public class Cat_Driver : MonoBehaviour
     [SerializeField] float catSpeed = 5f;
     [SerializeField] Transform obj;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -21,11 +15,10 @@ public class Cat_Driver : MonoBehaviour
         tempVect = tempVect.normalized * catSpeed * Time.deltaTime;
 
         obj.transform.position += tempVect;
-
-
-     Vector3 position = transform.position; //boundary
-    position.y = Mathf.Clamp(position.y, -30.5f, 30f);
-    position.x = Mathf.Clamp(position.x, -30.5f, 30f);    
-    transform.position = position;
+        
+        Vector3 position = transform.position; //boundary
+        position.y = Mathf.Clamp(position.y, -30.5f, 30f);
+        position.x = Mathf.Clamp(position.x, -30.5f, 30f);    
+        transform.position = position;
     }
 }

@@ -14,6 +14,7 @@ public class Food : MonoBehaviour
             if (gmObject != null)
             {
                 GM = gmObject.GetComponent<Gamemanager>();
+                GM.CheeseOnDeck ++;
             }
         }
     }
@@ -26,6 +27,7 @@ public class Food : MonoBehaviour
             GM.points--;
             GM.UpdateScoreText();
             Destroy(gameObject, 3);
+            GM.CheeseOnDeck --;
         }
     }
 }
