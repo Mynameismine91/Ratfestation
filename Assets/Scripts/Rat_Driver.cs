@@ -10,9 +10,10 @@ public bool locked_in; //the state wherein the rats are going straight to the fo
 public float moveSpeed = 2f;
 public Transform foodtransform;
 public float roamChangeTime = 2f;
-
+private Gamemanager GM;
 private Vector2 roamDirection;
 private float roamTimer;
+private int Assignedpoints;
 
 void Start()
 {
@@ -20,10 +21,12 @@ void Start()
 if (gameObject.name.StartsWith("slow"))
         {
             moveSpeed = 2f;
+            Assignedpoints = 1;
         }
 else if (gameObject.name.StartsWith("fast"))
         {
             moveSpeed = 4f;
+            Assignedpoints = 2;
         }
 }
 
@@ -36,6 +39,18 @@ void Update()
         if (food != null)
         {
             foodtransform = food.transform;
+        }
+    }
+
+if (GM == null)
+    {
+        GameObject gmObject = GameObject.Find("Gamemanager");
+
+        if (gmObject != null)
+        {
+            GM = gmObject.GetComponent<Gamemanager>();
+                    Debug.Log("1");
+
         }
     }
 
@@ -100,6 +115,10 @@ void ChooseRandomDirection()
 
         if (collision.gameObject.name == "Cat" )
         {
+            GM.points += Assignedpoints;
+        Debug.Log("2");
+        GM.UpdateScoreText();
+
             Destroy(gameObject);
         }
     }
