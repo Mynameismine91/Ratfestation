@@ -4,12 +4,23 @@ public class Rat_Spawner : MonoBehaviour
 {
 
     public GameObject[] ratPrefabs;
-
+public Gamemanager Gm;
     public float spawnInterval = 3f;
 
     void Start()
     {
         InvokeRepeating(nameof(SpawnRat), 1f, spawnInterval);
+
+                if (Gm == null)
+        {
+            GameObject gmObject = GameObject.Find("Gamemanager");
+
+            if (gmObject != null)
+            {
+                Gm = gmObject.GetComponent<Gamemanager>();
+                Debug.Log("GameManager found");
+            }
+        }
     }
 
     void SpawnRat()
@@ -29,6 +40,9 @@ public class Rat_Spawner : MonoBehaviour
             transform.position,
             Quaternion.identity
         );
+
+        Gm.numberofrats++;
+
     }
 }
 

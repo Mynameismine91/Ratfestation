@@ -42,7 +42,6 @@ public class Rat_Driver : MonoBehaviour
             if (gmObject != null)
             {
                 GM = gmObject.GetComponent<Gamemanager>();
-                Debug.Log("GameManager found");
             }
         }
 
@@ -147,9 +146,9 @@ public class Rat_Driver : MonoBehaviour
         {
             GM.points += Assignedpoints;
 
-            Debug.Log("Rat eaten! +" + Assignedpoints + " points");
 
             GM.UpdateScoreText();
+            GM.numberofrats--;
 
             Destroy(gameObject);
         }

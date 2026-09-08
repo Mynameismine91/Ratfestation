@@ -18,7 +18,7 @@ public class CheeseSpawner : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("We are the Mouselings!! Please feed us!!");
+  
 
             Vector2 random = new Vector2(Random.Range(-spawnArea.x, spawnArea.x + 1F), Random.Range(-spawnArea.y, spawnArea.y + 1));
             yield return new WaitForSeconds(waitTime);

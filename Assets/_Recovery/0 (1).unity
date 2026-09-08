@@ -608,7 +608,6 @@ MonoBehaviour:
   CheeseOnDeck: 0
   scoreText: {fileID: 1504177769}
   FinalText: {fileID: 1999583904}
-  UI: {fileID: 1766749765}
 --- !u!4 &191033448
 Transform:
   m_ObjectHideFlags: 0
@@ -4679,6 +4678,6 @@ SceneRoots:
   - {fileID: 1577278536}
   - {fileID: 716683836}
   - {fileID: 1766749766}
-  - {fileID: 1456403364}
   - {fileID: 2309483848524958928}
+  - {fileID: 1456403364}
   - {fileID: 1899075914}

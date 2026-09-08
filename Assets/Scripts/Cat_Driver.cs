@@ -4,8 +4,18 @@ public class Cat_Driver : MonoBehaviour
 {
     [SerializeField] float catSpeed = 5f;
     [SerializeField] Transform obj;
+    [SerializeField] Animator animator;
+
+    private bool left = false;
+    private bool right = false;
+    private bool down = false;
 
     // Update is called once per frame
+    void Start()
+    {
+        
+    }
+
     void Update()
     {
         float x = Input.GetAxis("Horizontal");
@@ -15,10 +25,38 @@ public class Cat_Driver : MonoBehaviour
         tempVect = tempVect.normalized * catSpeed * Time.deltaTime;
 
         obj.transform.position += tempVect;
-        
-        Vector3 position = transform.position; //boundary
-        position.y = Mathf.Clamp(position.y, -30.5f, 30f);
-        position.x = Mathf.Clamp(position.x, -30.5f, 30f);    
+
+
+        // Boundary
+        Vector3 position = transform.position;
+        position.y = Mathf.Clamp(position.y, -30f, 30f);
+        position.x = Mathf.Clamp(position.x, -30f, 30f);
         transform.position = position;
+
+
+        // Reset all directions first
+        left = false;
+        right = false;
+        down = false;
+
+        // Determine direction
+        if (y < 0)
+        {
+            down = true;
+        }
+        else if (x < 0)
+        {
+            left = true;
+        }
+        else if (x > 0)
+        {
+            right = true;
+        }
+
+
+        // Send the bools to the Animator
+        animator.SetBool("left", left);
+        animator.SetBool("right", right);
+        animator.SetBool("down", down);
     }
 }
