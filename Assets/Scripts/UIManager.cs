@@ -4,6 +4,8 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject panel;
     [SerializeField] private GameObject deadpanel;
+    [SerializeField] private GameObject startpanel;
+    [SerializeField] private GameObject instructionpanel;
     [SerializeField] private Gamemanager gameManager;
 
     public void ShowPanel()
@@ -29,5 +31,19 @@ public void dead()
         deadpanel.SetActive(true);
         gameManager.PauseGame(); 
         
+    }
+
+
+public void PressStart()
+    {
+        startpanel.SetActive(false);
+        instructionpanel.SetActive(true);
+    }
+
+
+public void instructed()
+    {
+        instructionpanel.SetActive(false);
+        gameManager.ResumeGame();
     }
 }

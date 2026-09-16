@@ -11,6 +11,11 @@ public int CheeseOnDeck = 0;
   [SerializeField] private TMP_Text scoreText;
   [SerializeField] private TMP_Text FinalText;
   [SerializeField] private UIManager UI;
+  
+  void Start()
+    {
+            Time.timeScale = 0f;
+    }
   public void UpdateScoreText()
     {
         scoreText.text = "Score: " + points;
