@@ -15,6 +15,8 @@ public class Rat_Driver : MonoBehaviour
 
     void Start()
     {
+        transform.localScale = Vector2.zero;
+
         ChooseRandomDirection();
 
         if (gameObject.name.StartsWith("slow"))
@@ -31,6 +33,12 @@ public class Rat_Driver : MonoBehaviour
 
     void Update()
     {
+        // Rat Spawn In
+        if (transform.localScale.x < 7)
+        {
+            transform.localScale = new Vector2(Mathf.SmoothStep(transform.localScale.x, 7, 0.125F), Mathf.SmoothStep(transform.localScale.y, 7, 0.125F));
+        }
+
         // Find the closest food
         FindClosestFood();
 

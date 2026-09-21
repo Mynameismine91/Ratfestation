@@ -27,6 +27,17 @@ public class Food : MonoBehaviour
         {
             Debug.LogError("Food could not find any den_Spawner objects!");
         }
+
+        transform.localScale = Vector2.zero;
+    }
+
+    private void Update()
+    {
+        // Cheese Spawn In
+        if (transform.localScale.x < 0.5F)
+        {
+            transform.localScale = new Vector2(Mathf.SmoothStep(transform.localScale.x, 0.5F, 0.125F), Mathf.SmoothStep(transform.localScale.y, 0.5F, 0.125F));
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
