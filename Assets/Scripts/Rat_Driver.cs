@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class Rat_Driver : MonoBehaviour
@@ -13,8 +15,14 @@ public class Rat_Driver : MonoBehaviour
     private float roamTimer;
     private int Assignedpoints;
 
+    private Transform cat;
+    private bool ratDie = false;
+    private bool despawn = false;
+
     void Start()
     {
+        transform.localScale = Vector2.zero;
+
         ChooseRandomDirection();
 
         if (gameObject.name.StartsWith("slow"))
@@ -31,6 +39,12 @@ public class Rat_Driver : MonoBehaviour
 
     void Update()
     {
+        // Rat Spawn In
+        if (transform.localScale.x < 7)
+        {
+            transform.localScale = new Vector2(Mathf.SmoothStep(transform.localScale.x, 7, 0.125F), Mathf.SmoothStep(transform.localScale.y, 7, 0.125F));
+        }
+
         // Find the closest food
         FindClosestFood();
 
@@ -101,6 +115,17 @@ public class Rat_Driver : MonoBehaviour
         position.x = Mathf.Clamp(position.x, -30.5f, 30f);
 
         transform.position = position;
+
+        // Rat Die
+        if (ratDie == true)
+        {
+            transform.position = new Vector2(Mathf.SmoothDamp(transform.position.x, transform.position.x + (Math.Sign(transform.position.x - cat.position.x) * 5.50F), ref moveSpeed, 0.125F), Mathf.SmoothDamp(transform.position.y, transform.position.y + (Math.Sign(transform.position.y - cat.position.y) * 5.50F), ref moveSpeed, 0.125F));
+
+            if (despawn == true)
+            {
+                transform.localScale = new Vector2(Mathf.SmoothStep(transform.localScale.x, -7, 0.125F), Mathf.SmoothStep(transform.localScale.y, -7, 0.125F));
+            }
+        }
     }
 
     void FindClosestFood()
@@ -136,7 +161,7 @@ public class Rat_Driver : MonoBehaviour
 
     void ChooseRandomDirection()
     {
-        roamDirection = Random.insideUnitCircle.normalized;
+        roamDirection = UnityEngine.Random.insideUnitCircle.normalized;
         roamTimer = roamChangeTime;
     }
 
@@ -150,7 +175,20 @@ public class Rat_Driver : MonoBehaviour
             GM.UpdateScoreText();
             GM.numberofrats--;
 
-            Destroy(gameObject);
+            cat = collision.otherCollider.transform;
+            ratDie = true;
+            StartCoroutine(KillRatCountdown());
         }
+    }
+
+    IEnumerator KillRatCountdown()
+    {
+        yield return new WaitForSeconds(2F);
+
+        despawn = true;
+
+        yield return new WaitForSeconds(2F);
+
+        Destroy(gameObject);
     }
 }

@@ -18,9 +18,7 @@ public class CheeseSpawner : MonoBehaviour
     {
         while (true)
         {
-  
-
-            Vector2 random = new Vector2(Random.Range(-spawnArea.x, spawnArea.x + 1F), Random.Range(-spawnArea.y, spawnArea.y + 1));
+            Vector2 random = new Vector2(Random.Range(-21, 30), Random.Range(-28, 22));
             yield return new WaitForSeconds(waitTime);
 
             Instantiate(food, random, Quaternion.identity);
